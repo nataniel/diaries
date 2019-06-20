@@ -1,0 +1,21 @@
+<?= $this->_('doctype') ?>
+<html lang="pl">
+<head>
+    <?= $this->render('layout/_header') ?>
+    <?= $this->stylesheets([ 'layout/security' ]) ?>
+</head>
+
+<body class="layout-security" id="<?= $this->controllerID() ?>"
+      itemscope itemtype="http://schema.org/WebPage">
+<div class="wrapper">
+
+    <main class="container">
+
+        <?= $this->render('layout/_flash') ?>
+        <?= $this->getPartial('content') ?>
+
+    </main>
+
+</div>
+</body>
+</html>

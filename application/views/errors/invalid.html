@@ -1,0 +1,22 @@
+<?php
+/** @var \Main\View\Base $this */
+?>
+<h1 style="font-size: 50px; font-weight: bold;">Ups, wystąpił błąd wewnętrzny witryny...</h1>
+
+<p>
+    <?= $this->linkTo($this->icon('arrow-left') . ' przejdź na stronę główną serwisu', '/') ?>
+    lub
+    <?= $this->mailTo('tech@rebel.pl?' . $this->buildQuery([
+            'subject' => sprintf('500: Wystąpił błąd: %s', $this->currentUrl()),
+            'body' => sprintf("Nieprawidłowy link: %s\nPrzekierowanie z: %s", $this->backUrl(), isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '- brak danych -'),
+        ]), 'napisz do działu IT') ?> z informacją o okolicznościach wystapienia błędu.</p>
+</p>
+
+<div style="background-image: url(http://i.imgur.com/lHEIfVV.gif); background-size: cover; min-height: 500px;"></div>
+
+<hr />
+<p>
+
+    500: Wystąpił błąd: <small class="text-muted"><?= $this->getRequest()->getCurrentPath() ?></small> |
+    Przekierowanie z: <small class="text-muted"><?= isset($_SERVER['HTTP_REFERER']) ? preg_replace('/\?.*/', '?...', $_SERVER['HTTP_REFERER']) : '- brak danych -' ?></small>
+</p>

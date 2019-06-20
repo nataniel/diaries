@@ -1,0 +1,25 @@
+<?php
+/** @var \Main\View\Base $this */
+?>
+<h1 style="font-size: 50px; font-weight: bold;">Ups, nie znaleziono...</h1>
+<p>To, czego szukasz, najwyraźniej nie istnieje...</p>
+
+<p>
+    <?= $this->linkTo($this->icon('arrow-left') . ' przejdź na stronę główną serwisu', '/') ?>
+    lub
+    <?= $this->mailTo('tech@rebel.pl?' . $this->buildQuery([
+            'subject' => sprintf('404: Nie znaleziono zasobu: %s', $this->currentUrl()),
+            'body' => sprintf("Nieprawidłowy link: %s\nPrzekierowanie z: %s", $this->backUrl(), isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '- brak danych -'),
+        ]), 'napisz do działu IT') ?>.
+</p>
+
+<video id="gif-mp4" poster="https://media.giphy.com/media/CthsoZkmO8Lvy/200_s.gif"
+       width="640" height="384" autoplay="autoplay" loop="loop">
+    <source src="https://media.giphy.com/media/CthsoZkmO8Lvy/giphy.mp4" type="video/mp4">
+</video>
+
+<hr />
+<p>
+    404: Nie znaleziono zasobu: <small class="text-muted"><?= $this->getRequest()->getCurrentPath() ?></small> |
+    Przekierowanie z: <small class="text-muted"><?= isset($_SERVER['HTTP_REFERER']) ? preg_replace('/\?.*/', '?...', $_SERVER['HTTP_REFERER']) : '- brak danych -' ?></small>
+</p>

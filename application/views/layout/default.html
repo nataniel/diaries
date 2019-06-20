@@ -1,0 +1,29 @@
+<?php
+/** @var \Main\View\Base $this */
+?>
+<?= $this->doctype() ?>
+<html lang="pl">
+<head>
+    <?= $this->render('layout/_header') ?>
+    <?= $this->stylesheets([ 'layout/default', 'sidebar' ]) ?>
+</head>
+
+<body class="layout-default" id="<?= $this->controllerID() ?>"
+      itemscope itemtype="http://schema.org/WebPage">
+
+<div class="container ml-0">
+    <nav class="p-3" id="sidebar">
+        <?= $this->render('layout/_sidebar') ?>
+    </nav>
+    <main class="p-3" id="content">
+
+        <?= $this->render('layout/_navbar') ?>
+        <?= $this->render('layout/_flash') ?>
+        <?= $this->getPartial('content') ?>
+
+    </main>
+    <div id="overlay"></div>
+</div>
+
+</body>
+</html>

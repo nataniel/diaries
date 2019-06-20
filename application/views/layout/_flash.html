@@ -1,0 +1,25 @@
+<?php
+/** @var Main\View\Base $this */
+$flash = $this->getFlash();
+?>
+
+<div class="flash">
+    <?php if (!empty($flash['message'])): ?>
+        <div class="alert alert-info alert-dismissible flaticon-info" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij powiadomienie"><span aria-hidden="true">&times;</span></button>
+            <?= join('<br />', $flash['message']) ?>
+        </div>
+    <?php endif; ?>
+    <?php if (!empty($flash['success'])): ?>
+        <div class="alert alert-success alert-dismissible flaticon-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij powiadomienie"><span aria-hidden="true">&times;</span></button>
+            <?= join('<br />', $flash['success']) ?>
+        </div>
+    <?php endif; ?>
+    <?php if (!empty($flash['error'])): ?>
+        <div class="alert alert-danger alert-dismissible flaticon-warning" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij powiadomienie"><span aria-hidden="true">&times;</span></button>
+            <?= join('<br />', $flash['error']) ?>
+        </div>
+    <?php endif; ?>
+</div>

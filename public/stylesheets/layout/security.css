@@ -1,0 +1,21 @@
+body {
+    background-image: url(http://festiwalgramy.com/images/gallery/6/IMG_3273.jpg);
+    background-size: cover;
+    padding-top: 100px;
+}
+
+body > .wrapper {
+    background-color: #fff;
+    padding: 5em;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.75);
+}
+
+.container {
+    max-width: 780px;
+}
+
+@media (max-width: 991px) {
+    body {
+        padding-top: 15px;
+    }
+}
