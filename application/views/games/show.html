@@ -1,0 +1,14 @@
+<?php
+/** @var Main\View\Base $this */
+/** @var Main\Model\Game $game */
+$game = $this->game;
+?>
+<h1><?= $this->getTitle() ?></h1>
+
+<h2>Podłączeni gracze:</h2>
+<ul>
+    <?php foreach ($game->getPlayers() as $player): ?>
+    <li><?= $player ?></li>
+    <?php endforeach; ?>
+</ul>
+<p>Aby dołączyć do gry, otwórz przeglądarkę w telefonie i przejdź pod adres: <strong><?= $this->urlTo($game->joinUrl(), true) ?></strong></p>

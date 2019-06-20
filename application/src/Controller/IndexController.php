@@ -5,7 +5,7 @@ class IndexController extends AbstractController
 {
     public function indexAction()
     {
-        return $this->redirectTo('/sales');
+
     }
 
     public function resetAction()

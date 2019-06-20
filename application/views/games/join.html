@@ -1,0 +1,21 @@
+<?php
+/** @var Main\View\Base $this */
+/** @var Main\Model\Game $game */
+$game = $this->game;
+$form = $this->createBootstrapForm($this->form);
+?>
+<h1><?= $this->getTitle() ?></h1>
+<?= $form->start() ?>
+<?= $form->errors() ?>
+<div class="form-row" style="max-width: 40em">
+    <div class="col"><?= $form->text('name') ?></div>
+    <div class="col"><?= $form->button('submit') ?></div>
+</div>
+<?= $form->end() ?>
+
+<p>... lub dołącz jako:</p>
+<ul>
+    <?php foreach ($game->getPlayers() as $player): ?>
+        <li><?= $this->linkTo($player, $game->actionUrl('connect/' . $player->id())) ?></li>
+    <?php endforeach; ?>
+</ul>

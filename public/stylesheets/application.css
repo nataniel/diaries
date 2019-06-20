@@ -68,6 +68,12 @@ dd {
     margin-bottom: 0;
 }
 
+h1 {
+    margin-bottom: 1em;
+    border-bottom: 1px solid #333;
+    padding-bottom: .5em;
+}
+
 #content .avatar {
     margin: 2px 10px 0 0;
     border-radius: 50%;
