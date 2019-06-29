@@ -12,8 +12,13 @@ use E4u\Model\Entity;
  */
 class Game extends Entity
 {
+    const STATUS_PREPARATION = 'preparation';
+
     /** @Column(type="string") */
     protected $name;
+
+    /** @Column(type="string") */
+    protected $status = self::STATUS_PREPARATION;
 
     /** @Column(type="datetime") */
     protected $created_at;
@@ -58,6 +63,27 @@ class Game extends Entity
         return $this->name;
     }
 
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param  string $status
+     * @return Game
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->getName();
@@ -86,11 +112,12 @@ class Game extends Entity
     }
 
     /**
+     * @param  string $go
      * @return string
      */
-    public function playUrl()
+    public function playUrl($go = null)
     {
-        return $this->actionUrl('play');
+        return $this->actionUrl('play') . (!empty($go) ? '&go=' . $go : '');
     }
 
     /**

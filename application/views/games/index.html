@@ -1,0 +1,13 @@
+<?php
+/** @var Main\View\Base $this */
+/** @var Main\Model\Game[] $games */
+$games = $this->games;
+?>
+<table class="table">
+<?php foreach ($games as $game): ?>
+<tr>
+    <td><?= $this->linkTo($game, $game->showUrl()) ?></td>
+</tr>
+<?php endforeach; ?>
+</table>
+<?= $this->linkTo('Utwórz nową grę...', '/games/create', [ 'class' => 'btn btn-primary' ]) ?>

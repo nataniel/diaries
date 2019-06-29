@@ -4,11 +4,58 @@
 $game = $this->game;
 ?>
 <h1><?= $this->getTitle() ?></h1>
+<div class="card mb-3 alert-success">
+    <div class="card-body">
+        <p>Aby dołączyć do gry, otwórz przeglądarkę w telefonie i przejdź pod adres:
+            <strong><?= $this->linkTo($this->urlTo($game->joinUrl(), true), $game->joinUrl()) ?></strong></p>
+    </div>
+</div>
 
 <h2>Podłączeni gracze:</h2>
-<ul>
+<div class="row">
     <?php foreach ($game->getPlayers() as $player): ?>
-    <li><?= $player ?></li>
+
+        <div class="col-2">
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h2 class="card-title"><?= $player->getName() ?> <small>(<?= $this->t($player->getCurrentLocation()) ?>)</small></h2>
+                    <?php if ($picture = $player->getPicture()): ?>
+                        <?= $this->image($picture, $player->getName(), [ 'class' => 'img-fluid' ])?>
+                    <?php endif; ?>
+                    <hr />
+                    <h3><?= $player->getClass() ?> <small>(poziom: <?= $player->getLevel() ?>)</small></h3>
+
+                    <dl class="row">
+
+                        <dt class="col-6">Siła</dt>
+                        <dd class="col-6 text-right">15 <small>(+3)</small></dd>
+
+
+                        <dt class="col-6">Zręczność</dt>
+                        <dd class="col-6 text-right">12 <small>(+1)</small></dd>
+
+
+                        <dt class="col-6">Kondycja</dt>
+                        <dd class="col-6 text-right">12 <small>(+1)</small></dd>
+
+
+                        <dt class="col-6">Inteligencja</dt>
+                        <dd class="col-6 text-right">12 <small>(+1)</small></dd>
+
+
+                        <dt class="col-6">Mądrość</dt>
+                        <dd class="col-6 text-right">12 <small>(+1)</small></dd>
+
+
+                        <dt class="col-6">Charyzma</dt>
+                        <dd class="col-6 text-right">12 <small>(+1)</small></dd>
+
+                    </dl>
+                </div>
+            </div>
+
+        </div>
+
     <?php endforeach; ?>
-</ul>
-<p>Aby dołączyć do gry, otwórz przeglądarkę w telefonie i przejdź pod adres: <strong><?= $this->urlTo($game->joinUrl(), true) ?></strong></p>
+</div>

@@ -2,7 +2,87 @@
 /** @var Main\View\Base $this */
 /** @var Main\Model\Game $game */
 $game = $this->game;
+
 /** @var Main\Model\Player $player */
 $player = $this->player;
+$otherPlayers = $player->getPlayersInMyLocation();
+$currentLocation = $player->getCurrentLocation();
+$availableLocations = $player->getAvailableLocations();
 ?>
 <h1><?= $this->getTitle() ?> <small>(jako <?= $player ?>)</small></h1>
+
+<div class="row">
+    <div class="col-2">
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <?php if ($picture = $player->getPicture()): ?>
+                    <?= $this->image($picture, $player->getName(), [ 'class' => 'img-fluid mb-2' ])?>
+                <?php endif; ?>
+                <h2 class="card-title"><?= $player->getClass() ?> (poziom: <?= $player->getLevel() ?>)</h2>
+
+                <dl class="row">
+
+                    <dt class="col-6">Siła</dt>
+                    <dd class="col-6 text-right">15 <small>(+3)</small></dd>
+
+
+                    <dt class="col-6">Zręczność</dt>
+                    <dd class="col-6 text-right">12 <small>(+1)</small></dd>
+
+
+                    <dt class="col-6">Kondycja</dt>
+                    <dd class="col-6 text-right">12 <small>(+1)</small></dd>
+
+
+                    <dt class="col-6">Inteligencja</dt>
+                    <dd class="col-6 text-right">12 <small>(+1)</small></dd>
+
+
+                    <dt class="col-6">Mądrość</dt>
+                    <dd class="col-6 text-right">12 <small>(+1)</small></dd>
+
+
+                    <dt class="col-6">Charyzma</dt>
+                    <dd class="col-6 text-right">12 <small>(+1)</small></dd>
+
+                </dl>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-10">
+
+        <?php if (!empty($currentLocation)): ?>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <?= $this->image($currentLocation->getImage(), $this->t($currentLocation), [ 'style' => 'max-height: 100px; width: auto; float: right; margin-left: 1em; margin-bottom: 1em;' ])?>
+                <p>Znajdujesz się w: <strong><?= $this->t($currentLocation) ?></strong>.<br />
+                <?php if (count($otherPlayers) > 0): ?>
+                    Pozostali gracze w tej lokalizacji:
+                    <?= join(', ', array_map(function (\Main\Model\Player $player) {
+                        return sprintf('<strong>%s</strong> <small>(%s - poz. %d)</small>', $player->getName(), $player->getClass(), $player->getLevel());
+                    }, $otherPlayers)) ?>.
+                <?php endif; ?>
+                </p>
+
+                <p>Morbi in ipsum congue, consectetur nisl eget, commodo mi. Mauris ut semper magna, ac hendrerit diam. Vivamus consectetur purus felis, sed posuere mi lacinia semper. Morbi in feugiat orci. Duis finibus nisl arcu, quis efficitur elit imperdiet et. Pellentesque non massa vel diam ullamcorper euismod. Donec lobortis viverra cursus.</p>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h2 class="card-title">Dostępne lokacje</h2>
+                <ul>
+                <?php foreach ($availableLocations as $location): ?>
+                    <li><?= $this->linkTo($this->t($location), $game->playUrl($location->getName()))?></li>
+                <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+
+        <?php endif; ?>
+
+    </div>
+</div>

@@ -4,7 +4,7 @@ namespace Main\Form;
 use E4u\Form;
 use Main\Model\Game;
 
-class CreatePlayer extends Form\Base
+class EditPlayer extends Form\Base
 {
     public function init()
     {
@@ -21,7 +21,7 @@ class CreatePlayer extends Form\Base
                 'accept' => 'image',
             ]),
 
-            new Form\Element\Submit('submit', 'Utwórz nowego gracza'),
+            new Form\Element\Submit('submit', 'Zapisz zmiany'),
 
         ]);
     }

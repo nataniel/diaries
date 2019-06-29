@@ -4,16 +4,14 @@ namespace Main\Controller;
 use E4u\Application\Controller as E4uController;
 use E4u\Application\View as E4uView;
 use Main\Configuration;
+use Main\Helper\UUID;
 use Main\View;
-use Rebel\Nav\Client;
 
 abstract class AbstractController extends E4uController
 {
     protected $defaultLayout = 'layout/default';
     protected $viewClass = View\Base::class;
-
-    /** @var Client */
-    private $client;
+    protected $uuid;
 
     public function init($action)
     {
@@ -33,15 +31,14 @@ abstract class AbstractController extends E4uController
     }
 
     /**
-     * @return Client
+     * @return UUID
      */
-    protected function getNavClient()
+    public function getUUID()
     {
-        if (null === $this->client) {
-            $nav = Configuration::navConfig();
-            $this->client = new Client($nav);
+        if (is_null($this->uuid)) {
+            $this->uuid = new UUID($this->getRequest()->getBaseUrl());
         }
 
-        return $this->client;
+        return $this->uuid;
     }
 }

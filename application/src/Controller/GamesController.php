@@ -2,6 +2,7 @@
 namespace Main\Controller;
 
 use E4u\Application\View;
+use E4u\Form\UploadedFile;
 use Main\Form;
 use Main\Model\Game;
 use E4u\Response;
@@ -9,6 +10,15 @@ use Main\Model\Player;
 
 class GamesController extends AbstractController
 {
+    public function indexAction()
+    {
+        $games = Game::findAll();
+        return [
+            'title' => 'Wszystkie rozgrywki',
+            'games' => $games,
+        ];
+    }
+
     public function createAction()
     {
         $game = Game::create([]);
@@ -32,6 +42,18 @@ class GamesController extends AbstractController
         $game = $this->getGameFromQuery();
         $player = $this->getPlayerFromSession($game);
 
+        if ($go = $this->getRequest()->getQuery('go')) {
+
+            $player->setLocation($go)
+                ->save();
+
+            return $this->redirectTo($game->playUrl(), sprintf(
+                'Zmieniłeś lokalizację na: <strong>%s</strong>.',
+                $this->t($player->getCurrentLocation())),
+                View::FLASH_SUCCESS);
+
+        }
+
         return [
             'title' => sprintf('Rozgrywka <strong>%s</strong>', $game),
             'game' => $game,
@@ -51,12 +73,19 @@ class GamesController extends AbstractController
     public function joinAction()
     {
         $game = $this->getGameFromQuery();
-        $player = new Player();
+        $player = new Player([ 'uuid' => $this->getUUID()->getValue() ]);
 
         $form = new Form\CreatePlayer($this->getRequest(), [ 'game' => $game, 'player' => $player, ]);
         if ($form->isValid()) {
+
             $player->setGame($game)
                 ->save();
+
+            if ($picture = $form->getValue('picture')) {
+                $file = new UploadedFile($picture);
+                $file->moveTo('public/users/' . $player->id() . '.jpg');
+                $player->setPicture('users/' . $player->id() . '.jpg')->save();
+            }
 
             return $this->redirectTo($game->actionUrl('connect/' . $player->id()),
                 sprintf('Dołączyłeś do rozgrywki <strong>%s</strong> jako <strong>%s</strong>.', $game, $player),
@@ -76,7 +105,7 @@ class GamesController extends AbstractController
      */
     private function getPlayerFromSession($game)
     {
-        $id = $_SESSION['player'];
+        $id = (int)$_SESSION['player'];
         if (empty($id)) {
             return $this->redirectTo($game->joinUrl());
         }

@@ -3,19 +3,23 @@
 /** @var Main\Model\Game $game */
 $game = $this->game;
 $form = $this->createBootstrapForm($this->form);
+$players = $game->getPlayers();
 ?>
 <h1><?= $this->getTitle() ?></h1>
 <?= $form->start() ?>
 <?= $form->errors() ?>
 <div class="form-row" style="max-width: 40em">
     <div class="col"><?= $form->text('name') ?></div>
+    <div class="col"><?= $form->file('picture', [ 'capture' => 'user', 'accept' => 'image/*' ]) ?></div>
     <div class="col"><?= $form->button('submit') ?></div>
 </div>
 <?= $form->end() ?>
 
+<?php if (count($players) > 0): ?>
 <p>... lub dołącz jako:</p>
 <ul>
-    <?php foreach ($game->getPlayers() as $player): ?>
+    <?php foreach ($players as $player): ?>
         <li><?= $this->linkTo($player, $game->actionUrl('connect/' . $player->id())) ?></li>
     <?php endforeach; ?>
 </ul>
+<?php endif; ?>

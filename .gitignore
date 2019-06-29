@@ -1,7 +1,7 @@
 application/config/environment/development.php
-application/config/environment/production.php
 logs
 tmp
 vendor
 .environment
 .idea
+public/users

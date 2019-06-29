@@ -4,6 +4,7 @@ namespace Main\View;
 use E4u\Application\View\Html as E4uView;
 use E4u\Form\Builder\Bootstrap4;
 use E4u\Form\Builder\Bootstrap41;
+use Main\Controller\AbstractController;
 use Main\Helper;
 use Main\Model\User;
 use E4u\Authentication\Identity;
@@ -36,10 +37,10 @@ class Base extends E4uView
     }
 
     /**
-     * @return User|Identity
+     * @return \E4u\Application\Controller|AbstractController
      */
-    public function getCurrentUser()
+    public function getController()
     {
-        return parent::getCurrentUser();
+        return parent::getController();
     }
 }
