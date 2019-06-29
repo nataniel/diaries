@@ -99,6 +99,33 @@ class GamesController extends AbstractController
         ];
     }
 
+    public function editAction()
+    {
+        $game = $this->getGameFromQuery();
+        $player = $this->getPlayerFromSession($game);
+
+        $form = new Form\EditPlayer($this->getRequest(), [ 'game' => $game, 'player' => $player, ]);
+        if ($form->isValid()) {
+
+            if ($picture = $form->getValue('picture')) {
+                $file = new UploadedFile($picture);
+                $file->moveTo('public/users/' . $player->id() . '.jpg');
+                $player->setPicture('users/' . $player->id() . '.jpg');
+            }
+
+            $player->save();
+            return $this->redirectTo($game->playUrl(),
+                'Zmiany zostały zapisane.',
+                View::FLASH_SUCCESS);
+        }
+
+        return [
+            'title' => sprintf('Edycja ustawień gracza %s.', $player),
+            'game' => $game,
+            'form' => $form,
+        ];
+    }
+
     /**
      * @param  Game $game
      * @return Response\Redirect|Player

@@ -1,0 +1,16 @@
+<?php
+/** @var Main\View\Base $this */
+/** @var Main\Model\Game $game */
+$game = $this->game;
+$form = $this->createBootstrapForm($this->form);
+$players = $game->getPlayers();
+?>
+<h1><?= $this->getTitle() ?></h1>
+<?= $form->start() ?>
+<?= $form->errors() ?>
+    <div class="form-row mb-3">
+        <div class="col-hd-2"><?= $form->text('name') ?></div>
+        <div class="col-hd-2"><?= $form->customFile('picture', [ 'capture' => 'user', 'accept' => 'image/*' ]) ?></div>
+        <div class="col-md"><?= $form->button('submit') ?></div>
+    </div>
+<?= $form->end() ?>

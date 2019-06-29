@@ -8,9 +8,9 @@ $players = $game->getPlayers();
 <h1><?= $this->getTitle() ?></h1>
 <?= $form->start() ?>
 <?= $form->errors() ?>
-<div class="form-row mb-3" style="max-width: 40em">
-    <div class="col-md"><?= $form->text('name') ?></div>
-    <div class="col-md"><?= $form->file('picture', [ 'capture' => 'user', 'accept' => 'image/*' ]) ?></div>
+<div class="form-row mb-3">
+    <div class="col-hd-2"><?= $form->text('name') ?></div>
+    <div class="col-hd-2"><?= $form->customFile('picture', [ 'capture' => 'user', 'accept' => 'image/*' ]) ?></div>
     <div class="col-md"><?= $form->button('submit') ?></div>
 </div>
 <?= $form->end() ?>

@@ -17,7 +17,7 @@ class EditPlayer extends Form\Base
             ]),
 
             new Form\Element\FileUpload('picture', [
-                'label' => 'Załaduj zdjęcie',
+                'label' => 'Zmień zdjęcie',
                 'accept' => 'image',
             ]),
 

@@ -1649,7 +1649,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nataniel/e4u-framework",
-                "reference": "ff28c1d62fef0c24bad84dd89e891214fec14ac4"
+                "reference": "7a520452c18ad9ddd1da4e067c62c7c0c7f898ae"
             },
             "require": {
                 "abraham/twitteroauth": "^0.6.4",
@@ -1692,7 +1692,7 @@
                 }
             ],
             "description": "E4u Framework",
-            "time": "2019-06-29T11:45:59+00:00"
+            "time": "2019-06-29T16:50:14+00:00"
         },
         {
             "name": "ocramius/package-versions",
