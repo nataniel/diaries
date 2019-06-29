@@ -82,7 +82,6 @@ class GamesController extends AbstractController
                 ->save();
 
             if ($picture = $form->getValue('picture')) {
-                var_dump($picture); exit();
                 $file = new UploadedFile($picture);
                 $file->moveTo('public/users/' . $player->id() . '.jpg');
                 $player->setPicture('users/' . $player->id() . '.jpg')->save();
